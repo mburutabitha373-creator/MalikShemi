@@ -59,6 +59,7 @@ document.querySelector('#app').innerHTML = `
         <figure><img src="/photos/latest-sunshine-memory.jpeg" alt="Malik enjoying a sunny day outside" /><figcaption>Sunshine looks good on you, Malik ☀️💛</figcaption></figure>
         <figure><img src="/photos/latest-sweet-memory.jpeg" alt="A cozy everyday moment together" /><figcaption>Little touches, big love 🥰🫶🏽</figcaption></figure>
         <figure><img src="/photos/shemi-portrait.jpeg" alt="Shemi smiling for a portrait" /><figcaption>Shemi, looking lovely 💕✨</figcaption></figure>
+        <figure><img src="/photos/latest-couple-memory.jpeg" alt="Malik kissing Shemi's cheek in the garden" /><figcaption>My favourite kind of hello 💋🌹</figcaption></figure>
       </div>
     </section>
 
