@@ -55,6 +55,10 @@ document.querySelector('#app').innerHTML = `
         <figure><img src="/photos/playful-black-and-white.jpeg" alt="A playful black and white moment" /><figcaption>Love looks silly too 😄</figcaption></figure>
         <figure><img src="/photos/mirror-moment.jpeg" alt="A playful mirror moment together" /><figcaption>Just our favourite duo ✨</figcaption></figure>
       </div>
+      <div class="new-media" aria-label="New memories">
+        <figure><img src="/photos/new-day-out.jpeg" alt="Mark enjoying a sunny day outside" /><figcaption>Sunshine looks good on you, Malik ☀️💛</figcaption></figure>
+        <figure class="video-card"><video src="/photos/new-memory.mp4" controls muted loop playsinline preload="metadata" aria-label="A new memory video"></video><figcaption>A little moment worth replaying 🎞️💕</figcaption></figure>
+      </div>
     </section>
 
     <section class="notes-section" id="notes">
