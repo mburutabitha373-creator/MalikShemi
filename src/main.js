@@ -2,6 +2,10 @@ import './style.css'
 
 const savedMoments = Number(localStorage.getItem('malik-shemi-moments') || 7)
 const savedNotes = JSON.parse(localStorage.getItem('malik-shemi-notes') || '[]')
+const relationshipStart = new Date('2025-04-26T00:00:00')
+const loveMessages = ['You are my favourite person in every room. ❤️', 'Malik + Shemi: still my best idea. 💖', 'I love the little life we are making. 🥰', 'One look at you and my heart says yes again. 🫶🏽']
+const reasons = ['your laugh makes ordinary days sparkle ✨', 'you make everything feel a little more like home 🏡', 'you choose softness, even on hard days 🥹', 'you are my favourite person to do nothing with 💕', 'you make my heart feel safe and silly at once 😘']
+const randomNotes = ['Missing you is my least favourite hobby. 💌', 'You are my today, my favourite tomorrow, and every sweet little in-between. 🌙', 'Thank you for being my calm, my chaos, and my person. 🫶🏽', 'A tiny reminder: you are loved more than you know. ❤️']
 
 document.querySelector('#app').innerHTML = `
   <header class="topbar">
@@ -10,7 +14,7 @@ document.querySelector('#app').innerHTML = `
       <a href="#story">Our story</a>
       <a href="#notes">Little notes</a>
     </nav>
-    <button class="icon-button" id="surprise-button" type="button" aria-label="Show a surprise">✦</button>
+    <div class="top-actions"><button class="icon-button" id="theme-toggle" type="button" aria-label="Toggle dark mode">☾</button><button class="icon-button" id="surprise-button" type="button" aria-label="Show a surprise">✦</button></div>
   </header>
 
   <main id="top">
@@ -23,6 +27,8 @@ document.querySelector('#app').innerHTML = `
           <a class="primary-button" href="#notes">Leave a little note <span>→</span></a>
           <button class="text-button" id="moment-button" type="button">Add a moment <span>＋</span></button>
         </div>
+        <div class="hero-tools"><button class="love-button" id="love-button" type="button">❤️ Send love</button><button class="text-button" id="message-button" type="button">💌 Open my message</button></div>
+        <p class="hidden-message" id="hidden-message" aria-live="polite">You are my favourite chapter, my sweetest surprise, and the person I want beside me for all the ordinary magic. 💖</p>
         <div class="sweet-chips" aria-label="Little things about us"><span>best friends-ish 🤭</span><span>forever team 🫶🏽</span><span>made of memories 📸</span></div>
       </div>
       <div class="hero-photo-wrap">
@@ -35,6 +41,17 @@ document.querySelector('#app').innerHTML = `
       <div><strong id="moment-count">${savedMoments}</strong><span>little moments<br />saved</span></div>
       <div><strong>∞</strong><span>reasons to<br />smile ☀️</span></div>
       <div><strong>1</strong><span>very good<br />team 💛</span></div>
+    </section>
+
+    <section class="love-tools" aria-labelledby="love-tools-title">
+      <div class="section-label">little love tools ✨</div>
+      <div class="tools-heading"><h2 id="love-tools-title">💕 Just you<br /><em>& me.</em></h2><p>Press a button whenever your heart needs a tiny bit of extra sweetness.</p></div>
+      <div class="tool-grid">
+        <article class="tool-card reason-card"><span class="tool-icon">🥰</span><h3>Reasons I love you</h3><p id="reason-output">Tap for a little reminder.</p><button class="soft-button" id="reason-button" type="button">Tell me one <span>↗</span></button></article>
+        <article class="tool-card note-generator"><span class="tool-icon">💖</span><h3>Random love note</h3><p id="random-note-output">A sweet message is waiting.</p><button class="soft-button" id="random-note-button" type="button">Surprise me <span>✦</span></button></article>
+        <article class="tool-card counter-card"><span class="tool-icon">⏳</span><h3>Our time together</h3><strong id="relationship-days">0</strong><p>days of choosing each other<br /><span>since April 26, 2025</span></p></article>
+        <article class="tool-card music-card"><span class="tool-icon">🎵</span><h3>Our little soundtrack</h3><p id="music-label">Choose a favourite song to play here. It will never autoplay.</p><input id="music-input" type="file" accept="audio/*" aria-label="Choose a favourite song" /><audio id="music-player" controls></audio></article>
+      </div>
     </section>
 
     <section class="story-section" id="story">
@@ -72,6 +89,7 @@ document.querySelector('#app').innerHTML = `
   </main>
   <footer><span>💖 Forever & always, Malik & Shemi</span><span>you + me = my favourite story 🫶🏽</span></footer>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="lightbox" id="lightbox" aria-hidden="true"><button class="lightbox-close" id="lightbox-close" type="button" aria-label="Close photo">×</button><img id="lightbox-image" alt="" /><p id="lightbox-caption"></p></div>
 `
 
 const toast = document.querySelector('#toast')
@@ -91,6 +109,22 @@ const releaseHearts = (event) => {
   }
 }
 
+const updateRelationshipDays = () => {
+  const days = Math.max(0, Math.floor((new Date() - relationshipStart) / 86400000))
+  document.querySelector('#relationship-days').textContent = days.toLocaleString()
+}
+
+const showRandom = (selector, values) => {
+  const output = document.querySelector(selector)
+  output.classList.remove('revealed')
+  void output.offsetWidth
+  output.textContent = values[Math.floor(Math.random() * values.length)]
+  output.classList.add('revealed')
+}
+
+updateRelationshipDays()
+setInterval(updateRelationshipDays, 3600000)
+
 document.querySelector('#moment-button').addEventListener('click', (event) => {
   const count = Number(document.querySelector('#moment-count').textContent) + 1
   document.querySelector('#moment-count').textContent = count
@@ -103,6 +137,60 @@ document.querySelector('#surprise-button').addEventListener('click', (event) => 
   showToast(['You are each other’s favourite notification. 💌', 'Malik + Shemi = excellent idea. 💖', 'A little joy, delivered. ✨'][Math.floor(Math.random() * 3)])
   releaseHearts(event)
 })
+
+document.querySelector('#love-button').addEventListener('click', (event) => {
+  showToast(loveMessages[Math.floor(Math.random() * loveMessages.length)])
+  releaseHearts(event)
+})
+
+document.querySelector('#message-button').addEventListener('click', (event) => {
+  const message = document.querySelector('#hidden-message')
+  message.classList.toggle('visible')
+  event.currentTarget.textContent = message.classList.contains('visible') ? '💌 Hide my message' : '💌 Open my message'
+  releaseHearts(event)
+})
+
+document.querySelector('#reason-button').addEventListener('click', (event) => { showRandom('#reason-output', reasons); releaseHearts(event) })
+document.querySelector('#random-note-button').addEventListener('click', (event) => { showRandom('#random-note-output', randomNotes); releaseHearts(event) })
+
+document.querySelector('#theme-toggle').addEventListener('click', (event) => {
+  document.body.classList.toggle('dark')
+  const dark = document.body.classList.contains('dark')
+  localStorage.setItem('malik-shemi-theme', dark ? 'dark' : 'light')
+  event.currentTarget.textContent = dark ? '☀' : '☾'
+  event.currentTarget.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Toggle dark mode')
+  releaseHearts(event)
+})
+
+if (localStorage.getItem('malik-shemi-theme') === 'dark') { document.body.classList.add('dark'); document.querySelector('#theme-toggle').textContent = '☀'; document.querySelector('#theme-toggle').setAttribute('aria-label', 'Switch to light mode') }
+
+const savedSongName = localStorage.getItem('malik-shemi-song-name')
+if (savedSongName) document.querySelector('#music-label').textContent = `${savedSongName} is ready when you are. 🎶 Choose it again to play after a refresh.`
+
+document.querySelector('#music-input').addEventListener('change', (event) => {
+  const file = event.target.files[0]
+  if (!file) return
+  document.querySelector('#music-player').src = URL.createObjectURL(file)
+  document.querySelector('#music-label').textContent = `${file.name} is ready when you are. 🎶`
+  localStorage.setItem('malik-shemi-song-name', file.name)
+  showToast('Your song is ready. Press play when you feel like it. 🎵')
+})
+
+document.querySelectorAll('.photo-grid img, .new-media img').forEach((image) => {
+  image.addEventListener('click', () => {
+    const lightbox = document.querySelector('#lightbox')
+    document.querySelector('#lightbox-image').src = image.src
+    document.querySelector('#lightbox-image').alt = image.alt
+    document.querySelector('#lightbox-caption').textContent = image.closest('figure')?.querySelector('figcaption')?.textContent || image.alt
+    lightbox.classList.add('open')
+    lightbox.setAttribute('aria-hidden', 'false')
+  })
+})
+
+const closeLightbox = () => { const lightbox = document.querySelector('#lightbox'); lightbox.classList.remove('open'); lightbox.setAttribute('aria-hidden', 'true') }
+document.querySelector('#lightbox-close').addEventListener('click', closeLightbox)
+document.querySelector('#lightbox').addEventListener('click', (event) => { if (event.target.id === 'lightbox') closeLightbox() })
+document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeLightbox() })
 
 document.querySelector('#note-form').addEventListener('submit', (event) => {
   event.preventDefault()
