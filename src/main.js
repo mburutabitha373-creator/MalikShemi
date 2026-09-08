@@ -6,6 +6,13 @@ const relationshipStart = new Date('2025-04-26T00:00:00')
 const loveMessages = ['You are my favourite person in every room. ❤️', 'Malik + Shemi: still my best idea. 💖', 'I love the little life we are making. 🥰', 'One look at you and my heart says yes again. 🫶🏽']
 const reasons = ['your laugh makes ordinary days sparkle ✨', 'you make everything feel a little more like home 🏡', 'you choose softness, even on hard days 🥹', 'you are my favourite person to do nothing with 💕', 'you make my heart feel safe and silly at once 😘']
 const randomNotes = ['Missing you is my least favourite hobby. 💌', 'You are my today, my favourite tomorrow, and every sweet little in-between. 🌙', 'Thank you for being my calm, my chaos, and my person. 🫶🏽', 'A tiny reminder: you are loved more than you know. ❤️']
+const quizQuestions = [
+  { question: 'Who said “I love you” first? ❤️', options: ['Malik', 'Shemi', 'Both of us'], answer: 'Shemi' },
+  { question: 'Who is more stubborn? 😂', options: ['Malik', 'Shemi', 'It is a tie'], answer: 'Malik' },
+  { question: 'Who gets jealous faster? 👀', options: ['Malik', 'Shemi', 'Neither, we are angels'], answer: 'Shemi' },
+  { question: 'Who apologizes first? 🤭', options: ['Malik', 'Shemi', 'Whoever misses the other more'], answer: 'Both of us' },
+  { question: 'Who is more romantic? 🥰', options: ['Malik', 'Shemi', 'Both of us'], answer: 'Both of us' },
+]
 
 document.querySelector('#app').innerHTML = `
   <header class="topbar">
@@ -48,11 +55,21 @@ document.querySelector('#app').innerHTML = `
       <div class="tools-heading"><h2 id="love-tools-title">💕 Just you<br /><em>& me.</em></h2><p>Press a button whenever your heart needs a tiny bit of extra sweetness.</p></div>
       <div class="tool-grid">
         <article class="tool-card reason-card"><span class="tool-icon">🥰</span><h3>Reasons I love you</h3><p id="reason-output">Tap for a little reminder.</p><button class="soft-button" id="reason-button" type="button">Tell me one <span>↗</span></button></article>
-        <article class="tool-card note-generator"><span class="tool-icon">💖</span><h3>Random love note</h3><p id="random-note-output">A sweet message is waiting.</p><button class="soft-button" id="random-note-button" type="button">Surprise me <span>✦</span></button></article>
-        <article class="tool-card counter-card"><span class="tool-icon">⏳</span><h3>Our time together</h3><strong id="relationship-days">0</strong><p>days of choosing each other<br /><span>since April 26, 2025</span></p></article>
-        <article class="tool-card music-card"><span class="tool-icon">🎵</span><h3>Our little soundtrack</h3><p id="music-label">Choose a favourite song to play here. It will never autoplay.</p><input id="music-input" type="file" accept="audio/*" aria-label="Choose a favourite song" /><audio id="music-player" controls></audio></article>
+          <article class="tool-card note-generator"><span class="tool-icon">💖</span><h3>Random love note</h3><p id="random-note-output">A sweet message is waiting.</p><button class="soft-button" id="random-note-button" type="button">Give Me a Love Note 💌</button></article>
+          <article class="tool-card counter-card"><span class="tool-icon">⏳</span><h3>Our time together</h3><div class="time-counter"><div><strong id="relationship-days">0</strong><span>days ❤️</span></div><div><strong id="relationship-hours">0</strong><span>hours 💕</span></div><div><strong id="relationship-minutes">0</strong><span>minutes 🥰</span></div><div><strong id="relationship-seconds">0</strong><span>seconds ✨</span></div></div><p>of choosing each other<br /><span>since April 26, 2025</span></p></article>
       </div>
     </section>
+
+      <section class="secret-section" aria-labelledby="secret-title">
+        <div class="section-label">private little doors 🔐</div>
+        <div class="secret-heading"><h2 id="secret-title">Open when your heart<br /><em>needs me.</em></h2><p>Three tiny messages, tucked away for exactly the right moment. ✨</p></div>
+        <div class="secret-grid">
+          <button class="secret-card" type="button" data-message="Even from far away, my heart knows exactly where home is: with you. I miss your face, your laugh, and your arms around me. 🥺❤️"><span>🥺❤️</span><strong>Click when you miss me</strong><small>a message for the soft days</small></button>
+          <button class="secret-card" type="button" data-message="Smile, my love. You are someone's favourite person, someone's safest place, and definitely my best notification. 😊💕"><span>😊💕</span><strong>Click when you need a smile</strong><small>a pocket-sized little cheer</small></button>
+          <button class="secret-card" type="button" data-message="Surprise: I would choose you in every timeline, every silly argument, and every ordinary Tuesday. You are my forever favourite. 🎁💖"><span>🎁</span><strong>Open your little surprise</strong><small>handle with love</small></button>
+        </div>
+        <p class="secret-output" id="secret-output" aria-live="polite"></p>
+      </section>
 
     <section class="story-section" id="story">
       <div class="section-label">01 / our little story 💌</div>
@@ -78,6 +95,25 @@ document.querySelector('#app').innerHTML = `
         <figure><img src="/photos/shemi-portrait.jpeg" alt="Shemi smiling for a portrait" /><figcaption>Shemi, looking lovely 💕✨</figcaption></figure>
         <figure><img src="/photos/latest-couple-memory.jpeg" alt="Malik kissing Shemi's cheek in the garden" /><figcaption>My favourite kind of hello 💋🌹</figcaption></figure>
       </div>
+    </section>
+
+    <section class="timeline-section" aria-labelledby="timeline-title">
+      <div class="section-label">our love story 📖💕</div>
+      <div class="timeline-heading"><h2 id="timeline-title">A story still<br /><em>being written.</em></h2><p>Scroll through our favourite chapters. The best ones are still ahead. ♾️</p></div>
+      <div class="timeline">
+        <article class="timeline-item"><span class="timeline-dot">💌</span><div><small>The Beginning</small><h3>From a Snap hello</h3><p>One little message became a whole universe of inside jokes, late chats, and wondering when we would finally meet.</p></div></article>
+        <article class="timeline-item"><span class="timeline-dot">🥰</span><div><small>Our First Memory · April 26, 2025</small><h3>Hands held, hearts full</h3><p>The first time we met physically. A simple hand-hold that somehow said everything.</p></div></article>
+        <article class="timeline-item"><span class="timeline-dot">❤️</span><div><small>Special Moments</small><h3>The ordinary magic</h3><p>Every laugh, hug, silly photo, and “have you eaten?” is another reason this feels like home.</p></div></article>
+        <article class="timeline-item"><span class="timeline-dot">📸</span><div><small>Favourite Memories</small><h3>Proof that joy looks good on us</h3><p>Pool days, cheek kisses, shared corners, and the photos we keep opening just to smile again.</p></div></article>
+        <article class="timeline-item"><span class="timeline-dot">🫶🏽</span><div><small>Today</small><h3>Still my favourite story</h3><p>We are still learning each other, loving loudly, and choosing the little life that belongs to us.</p></div></article>
+        <article class="timeline-item"><span class="timeline-dot">♾️</span><div><small>Our Future</small><h3>More chapters, please</h3><p>More sunsets, more photos, more growing, and a lifetime of finding our way back to each other.</p></div></article>
+      </div>
+    </section>
+
+    <section class="quiz-section" aria-labelledby="quiz-title">
+      <div class="section-label">a little couple challenge 🎮</div>
+      <div class="quiz-heading"><h2 id="quiz-title">Who knows who<br /><em>better?</em></h2><p>Choose your answers, compare your instincts, and see how well you have been paying attention. 👀</p></div>
+      <form class="quiz-card" id="quiz-form">${renderQuizQuestions()}<button class="primary-button quiz-submit" type="submit">Reveal our score 💖 <span>→</span></button><p class="quiz-result" id="quiz-result" aria-live="polite"></p></form>
     </section>
 
     <section class="notes-section" id="notes">
@@ -110,8 +146,12 @@ const releaseHearts = (event) => {
 }
 
 const updateRelationshipDays = () => {
-  const days = Math.max(0, Math.floor((new Date() - relationshipStart) / 86400000))
-  document.querySelector('#relationship-days').textContent = days.toLocaleString()
+  const elapsed = Math.max(0, new Date() - relationshipStart)
+  const totalSeconds = Math.floor(elapsed / 1000)
+  document.querySelector('#relationship-days').textContent = Math.floor(totalSeconds / 86400).toLocaleString()
+  document.querySelector('#relationship-hours').textContent = String(Math.floor(totalSeconds / 3600) % 24).padStart(2, '0')
+  document.querySelector('#relationship-minutes').textContent = String(Math.floor(totalSeconds / 60) % 60).padStart(2, '0')
+  document.querySelector('#relationship-seconds').textContent = String(totalSeconds % 60).padStart(2, '0')
 }
 
 const showRandom = (selector, values) => {
@@ -123,9 +163,39 @@ const showRandom = (selector, values) => {
 }
 
 updateRelationshipDays()
-setInterval(updateRelationshipDays, 3600000)
+setInterval(updateRelationshipDays, 1000)
 
-document.querySelector('#moment-button').addEventListener('click', (event) => {
+document.querySelectorAll('.secret-card').forEach((card) => card.addEventListener('click', (event) => {
+  const output = document.querySelector('#secret-output')
+  output.textContent = card.dataset.message
+  output.classList.remove('revealed')
+  void output.offsetWidth
+  output.classList.add('revealed')
+  showToast('A little message, just for you. 💌')
+  releaseHearts(event)
+}))
+
+document.querySelectorAll('.timeline-item').forEach((item) => {
+  const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) entry.target.classList.add('in-view') }), { threshold: .2 })
+  observer.observe(item)
+})
+
+document.querySelector('#quiz-form')?.addEventListener('submit', (event) => {
+  event.preventDefault()
+  const formData = new FormData(event.currentTarget)
+  const score = quizQuestions.reduce((total, question, index) => total + (formData.get(`question-${index}`) === question.answer ? 1 : 0), 0)
+  const result = score === quizQuestions.length ? 'Perfect score! You two are basically telepathic soulmates. 💖✨' : score >= 3 ? `You got ${score}/${quizQuestions.length}! That is a very loving amount of knowing. 🥰` : `You got ${score}/${quizQuestions.length}. Time for more dates, more questions, and more kisses. 😘`
+  document.querySelector('#quiz-result').textContent = result
+  document.querySelector('#quiz-result').classList.add('revealed')
+  localStorage.setItem('malik-shemi-quiz-result', result)
+  showToast('Your couple score is tucked away. 🎮💕')
+  releaseHearts(event)
+})
+
+const savedQuizResult = localStorage.getItem('malik-shemi-quiz-result')
+if (savedQuizResult) { document.querySelector('#quiz-result').textContent = `Last time: ${savedQuizResult}`; document.querySelector('#quiz-result').classList.add('revealed') }
+
+document.querySelector('#moment-button')?.addEventListener('click', (event) => {
   const count = Number(document.querySelector('#moment-count').textContent) + 1
   document.querySelector('#moment-count').textContent = count
   localStorage.setItem('malik-shemi-moments', count)
@@ -133,27 +203,27 @@ document.querySelector('#moment-button').addEventListener('click', (event) => {
   releaseHearts(event)
 })
 
-document.querySelector('#surprise-button').addEventListener('click', (event) => {
+document.querySelector('#surprise-button')?.addEventListener('click', (event) => {
   showToast(['You are each other’s favourite notification. 💌', 'Malik + Shemi = excellent idea. 💖', 'A little joy, delivered. ✨'][Math.floor(Math.random() * 3)])
   releaseHearts(event)
 })
 
-document.querySelector('#love-button').addEventListener('click', (event) => {
+document.querySelector('#love-button')?.addEventListener('click', (event) => {
   showToast(loveMessages[Math.floor(Math.random() * loveMessages.length)])
   releaseHearts(event)
 })
 
-document.querySelector('#message-button').addEventListener('click', (event) => {
+document.querySelector('#message-button')?.addEventListener('click', (event) => {
   const message = document.querySelector('#hidden-message')
   message.classList.toggle('visible')
   event.currentTarget.textContent = message.classList.contains('visible') ? '💌 Hide my message' : '💌 Open my message'
   releaseHearts(event)
 })
 
-document.querySelector('#reason-button').addEventListener('click', (event) => { showRandom('#reason-output', reasons); releaseHearts(event) })
-document.querySelector('#random-note-button').addEventListener('click', (event) => { showRandom('#random-note-output', randomNotes); releaseHearts(event) })
+document.querySelector('#reason-button')?.addEventListener('click', (event) => { showRandom('#reason-output', reasons); releaseHearts(event) })
+document.querySelector('#random-note-button')?.addEventListener('click', (event) => { showRandom('#random-note-output', randomNotes); releaseHearts(event) })
 
-document.querySelector('#theme-toggle').addEventListener('click', (event) => {
+document.querySelector('#theme-toggle')?.addEventListener('click', (event) => {
   document.body.classList.toggle('dark')
   const dark = document.body.classList.contains('dark')
   localStorage.setItem('malik-shemi-theme', dark ? 'dark' : 'light')
@@ -167,7 +237,7 @@ if (localStorage.getItem('malik-shemi-theme') === 'dark') { document.body.classL
 const savedSongName = localStorage.getItem('malik-shemi-song-name')
 if (savedSongName) document.querySelector('#music-label').textContent = `${savedSongName} is ready when you are. 🎶 Choose it again to play after a refresh.`
 
-document.querySelector('#music-input').addEventListener('change', (event) => {
+document.querySelector('#music-input')?.addEventListener('change', (event) => {
   const file = event.target.files[0]
   if (!file) return
   document.querySelector('#music-player').src = URL.createObjectURL(file)
@@ -188,11 +258,11 @@ document.querySelectorAll('.photo-grid img, .new-media img').forEach((image) => 
 })
 
 const closeLightbox = () => { const lightbox = document.querySelector('#lightbox'); lightbox.classList.remove('open'); lightbox.setAttribute('aria-hidden', 'true') }
-document.querySelector('#lightbox-close').addEventListener('click', closeLightbox)
-document.querySelector('#lightbox').addEventListener('click', (event) => { if (event.target.id === 'lightbox') closeLightbox() })
+document.querySelector('#lightbox-close')?.addEventListener('click', closeLightbox)
+document.querySelector('#lightbox')?.addEventListener('click', (event) => { if (event.target.id === 'lightbox') closeLightbox() })
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeLightbox() })
 
-document.querySelector('#note-form').addEventListener('submit', (event) => {
+document.querySelector('#note-form')?.addEventListener('submit', (event) => {
   event.preventDefault()
   const input = document.querySelector('#note-input')
   savedNotes.unshift({ text: input.value, date: new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) })
@@ -206,6 +276,10 @@ document.querySelector('#note-form').addEventListener('submit', (event) => {
 function renderNotes(notes) {
   if (!notes.length) return '<p class="empty-notes">Your first note is waiting here.</p>'
   return notes.slice(0, 3).map((note) => `<article class="note-card"><span class="note-pin">♡</span><p>${escapeHtml(note.text)}</p><time>${note.date}</time></article>`).join('')
+}
+
+function renderQuizQuestions() {
+  return quizQuestions.map((question, index) => `<fieldset class="quiz-question"><legend>${index + 1}. ${question.question}</legend><div class="quiz-options">${question.options.map((option) => `<label><input type="radio" name="question-${index}" value="${option}" required /><span>${option}</span></label>`).join('')}</div></fieldset>`).join('')
 }
 
 function escapeHtml(text) {
