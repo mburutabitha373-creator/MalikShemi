@@ -56,7 +56,7 @@ document.querySelector('#app').innerHTML = `
         <figure><img src="/photos/mirror-moment.jpeg" alt="A playful mirror moment together" /><figcaption>Just our favourite duo ✨</figcaption></figure>
       </div>
       <div class="new-media" aria-label="New memories">
-        <figure><img src="/photos/new-day-out.jpeg" alt="Mark enjoying a sunny day outside" /><figcaption>Sunshine looks good on you, Malik ☀️💛</figcaption></figure>
+        <figure><img src="/photos/latest-sunshine-memory.jpeg" alt="Malik enjoying a sunny day outside" /><figcaption>Sunshine looks good on you, Malik ☀️💛</figcaption></figure>
         <figure><img src="/photos/latest-sweet-memory.jpeg" alt="A cozy everyday moment together" /><figcaption>Little touches, big love 🥰🫶🏽</figcaption></figure>
       </div>
     </section>
