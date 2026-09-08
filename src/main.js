@@ -40,7 +40,7 @@ document.querySelector('#app').innerHTML = `
     <section class="story-section" id="story">
       <div class="section-label">01 / our little story 💌</div>
       <div class="story-content"><h2>🌹 Our love<br /><em>story.</em></h2><p>Two favourite people, one soft place to land. Our kind of magic is in the little things: shared laughs, warm hugs, and choosing each other every day. 🫶🏽</p><div class="love-list" aria-label="Reasons why I love you"><span>your laugh 💖</span><span>your soft heart 🥹</span><span>our silly jokes 😘</span></div><div class="signature">Malik <span>♡</span> Shemi</div></div>
-      <article class="meet-card"><img src="/photos/snap-to-real-life.jpeg" alt="A memory from Malik and Shemi's first meeting" /><div class="meet-card-copy"><span class="meet-date">April 26, 2025</span><h3>From Snap to real life 💛</h3><p>We first met on Snapchat, then met physically for the first time and held hands. The beginning of our favourite hello. 📸🤝🏾</p><span class="quote-author">our first in-person memory</span></div></article>
+      <article class="meet-card"><img src="/photos/recent-whatsapp-memory.jpeg" alt="Malik and Shemi holding hands in their newest photo" /><div class="meet-card-copy"><span class="meet-date">April 26, 2025</span><h3>From Snap to real life 💛</h3><p>We first met on Snapchat, then met physically for the first time and held hands. The beginning of our favourite hello. 📸🤝🏾</p><span class="quote-author">our first in-person memory</span></div></article>
     </section>
 
     <section class="gallery-section" aria-labelledby="gallery-title">
@@ -57,7 +57,7 @@ document.querySelector('#app').innerHTML = `
       </div>
       <div class="new-media" aria-label="New memories">
         <figure><img src="/photos/new-day-out.jpeg" alt="Mark enjoying a sunny day outside" /><figcaption>Sunshine looks good on you, Malik ☀️💛</figcaption></figure>
-        <figure class="video-card"><video src="/photos/new-memory.mp4" controls muted loop playsinline preload="metadata" aria-label="A new memory video"></video><figcaption>A little moment worth replaying 🎞️💕</figcaption></figure>
+        <figure><img src="/photos/recent-whatsapp-memory.jpeg" alt="A recent outdoor WhatsApp memory" /><figcaption>A sunny little adventure together ☀️💕</figcaption></figure>
       </div>
     </section>
 
